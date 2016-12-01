@@ -20,10 +20,10 @@ int runprog(char a[]){
   cmd[i] = 0;
   char exit[] = "exit";
   char cd[] = "cd";
-  if (strcmp(cmd[0], exit) == 0){
-    kill(getppid(),15);
-    kill(getpid(), 15);
-  }
+  //  if (strcmp(cmd[0], exit) == 0){
+  // kill(getppid(),15);
+  //  kill(getpid(), 15);
+  //}
   if(strcmp(cmd[0],cd) == 0){
     chdir(cmd[i-1]);
   }
@@ -32,20 +32,53 @@ int runprog(char a[]){
    
 }
 
-int main(){
-  char path [256];
-  char buffer [256];
-  while(1){
-    getcwd(&path, 255);
-    printf("%s ", path);
-    fgets(&buffer, 256, stdin);
-    //printf("%s \n", buffer);
-    if (fork() == 0){
-      runprog(buffer);
+int multcmd(char cmd[]){
+  char * s;
+  char a[256];
+  *(strchr(cmd, '\n')) = NULL;
+  while(cmd){
+    s = strsep(&cmd, ";");
+    printf("%s \n", s);
+    strcpy(a,s);
+    printf("%s \n", a);
+    if (fork() = 0 ){
+      runprog(a);
     }
-    else {
+    else{
       wait();
     }
   }
   return 0;
+}
+
+  
+
+int main(){
+  char path [256];
+  char buffer [256];
+  char exit [] = "exit";
+  int i = 1;
+  char semicolon[] = ";";
+  while(i == 1){
+    getcwd(&path, 255);
+    printf("%s ", path);
+    fgets(&buffer, 256, stdin);
+    if ((strstr(&buffer,&semicolon))){
+      multcmd(buffer);
+    }
+    else if ((strstr(&buffer,&exit))){
+      printf("Terminated\n");
+      return 0;
+    }
+    //printf("%s \n", buffer);
+    else{
+      if (fork() == 0){
+	runprog(buffer);
+      }
+      else {
+	wait();
+      }
+    }
+  }
+    return 0;
 }
