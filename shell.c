@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
+#include <fcntl.h>
 
 int runprog(char a[]){
   char * s;
@@ -32,6 +33,20 @@ int runprog(char a[]){
    
 }
 
+char trim(char orig[]){
+  char * s;
+  //printf("Before: %s has %d characters\n", orig, strlen(&orig));
+  if (orig[0] == " "){
+    s = strsep(&orig, " ");
+
+  }
+  if (orig[strlen(&orig) - 1] = " "){
+    orig[strlen(&orig) - 1] = 0;
+  }
+  //printf("After: %s has %d characters\n", orig, strlen(&orig)); 
+  return orig;
+}
+
 int multcmd(char cmd[]){
   char * s;
   char a[256];
@@ -41,17 +56,24 @@ int multcmd(char cmd[]){
     printf("%s \n", s);
     strcpy(a,s);
     printf("%s \n", a);
-    if (fork() = 0 ){
-      runprog(a);
-    }
-    else{
-      wait();
-    }
+    trim(a);
+    //  if (fork() = 0 ){
+    // runprog(a);
+    //}
+    //else{
+    // wait();
+    //}
   }
   return 0;
 }
 
-  
+void redirect(char cmd[]){
+  if(strchr(cmd, ">") ){
+    printf("Works");
+    dup2(open(".", OCREAT | O_EXCL), dup(STDOUT_FILENO));
+    
+  }
+}
 
 int main(){
   char path [256];
@@ -63,6 +85,7 @@ int main(){
     getcwd(&path, 255);
     printf("%s ", path);
     fgets(&buffer, 256, stdin);
+    redirect(buffer);
     if ((strstr(&buffer,&semicolon))){
       multcmd(buffer);
     }
