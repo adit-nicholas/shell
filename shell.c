@@ -33,31 +33,31 @@ int runprog(char a[]){
    
 }
 
-char trim(char orig[]){
-  char * s;
+//char trim(char orig[]){
+//  char * s;
   //printf("Before: %s has %d characters\n", orig, strlen(&orig));
-  if (orig[0] == " "){
-    s = strsep(&orig, " ");
-
-  }
-  if (orig[strlen(&orig) - 1] = " "){
-    orig[strlen(&orig) - 1] = 0;
-  }
+  //if (orig[0] == " "){
+//s = strsep(&orig, " ");
+//
+//}
+//if (orig[strlen(&orig) - 1] = " "){
+//  orig[strlen(&orig) - 1] = 0;
+//}
   //printf("After: %s has %d characters\n", orig, strlen(&orig)); 
   return orig;
 }
 
-int multcmd(char cmd[]){
-  char * s;
-  char a[256];
-  *(strchr(cmd, '\n')) = NULL;
-  while(cmd){
-    s = strsep(&cmd, ";");
-    printf("%s \n", s);
-    strcpy(a,s);
-    printf("%s \n", a);
-    trim(a);
-    //  if (fork() = 0 ){
+//int multcmd(char cmd[]){
+//char * s;
+//char a[256];
+//*(strchr(cmd, '\n')) = NULL;
+//while(cmd){
+//  s = strsep(&cmd, ";");
+//  printf("%s \n", s);
+//  strcpy(a,s);
+//  printf("%s \n", a);
+//  trim(a);
+  //  if (fork() = 0 ){
     // runprog(a);
     //}
     //else{
@@ -67,12 +67,12 @@ int multcmd(char cmd[]){
   return 0;
 }
 
-void redirect(char cmd[]){
-  if(strchr(cmd, ">") ){
-    printf("Works");
-    dup2(open(".", OCREAT | O_EXCL), dup(STDOUT_FILENO));
-    
-  }
+//void redirect(char cmd[]){
+//if(strchr(cmd, ">") ){
+//  printf("Works");
+//  dup2(open(".", OCREAT | O_EXCL), dup(STDOUT_FILENO));
+//  
+//}
 }
 
 int main(){
