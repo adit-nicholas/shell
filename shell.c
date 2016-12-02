@@ -44,8 +44,8 @@ int runprog(char a[]){
 //  orig[strlen(&orig) - 1] = 0;
 //}
   //printf("After: %s has %d characters\n", orig, strlen(&orig)); 
-  return orig;
-}
+// return orig;
+//}
 
 //int multcmd(char cmd[]){
 //char * s;
@@ -63,9 +63,9 @@ int runprog(char a[]){
     //else{
     // wait();
     //}
-  }
-  return 0;
-}
+// }
+//return 0;
+//}
 
 //void redirect(char cmd[]){
 //if(strchr(cmd, ">") ){
@@ -73,7 +73,7 @@ int runprog(char a[]){
 //  dup2(open(".", OCREAT | O_EXCL), dup(STDOUT_FILENO));
 //  
 //}
-}
+//}
 
 int main(){
   char path [256];
@@ -85,10 +85,10 @@ int main(){
     getcwd(&path, 255);
     printf("%s ", path);
     fgets(&buffer, 256, stdin);
-    redirect(buffer);
-    if ((strstr(&buffer,&semicolon))){
-      multcmd(buffer);
-    }
+    //  redirect(buffer);
+    //if ((strstr(&buffer,&semicolon))){
+    //multcmd(buffer);
+    //}
     else if ((strstr(&buffer,&exit))){
       printf("Terminated\n");
       return 0;
