@@ -89,7 +89,7 @@ int main(){
     //if ((strstr(&buffer,&semicolon))){
     //multcmd(buffer);
     //}
-    else if ((strstr(&buffer,&exit))){
+    if ((strstr(&buffer,&exit))){
       printf("Terminated\n");
       return 0;
     }
